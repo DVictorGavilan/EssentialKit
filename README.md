@@ -24,6 +24,7 @@ This project uses:
 ## How to use it
 Install the library
 
-´´´
+```bash
 pip install essentialkit
-´´´
+```
+
