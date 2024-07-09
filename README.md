@@ -4,7 +4,7 @@
 A  comprehensive utility package to simplify common tasks in Python programming
 
 ## Owner
-For any bugs or questions, please reach out to [Dani Gavilán](danigavipedro96@gmail.com)
+For any bugs or questions, please reach out to [Dani Gavilán](mailto:danigavipedro96@gmail.com)
 
 ## Branching Methodology
 This project follows a Git Flow simplified branching methodology
