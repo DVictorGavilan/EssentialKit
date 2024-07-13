@@ -1,6 +1,6 @@
 [project]
 name = "essentialkit"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
   { name="Dani Gavilan", email="danigavipedro96@gmail.com" },
 ]
