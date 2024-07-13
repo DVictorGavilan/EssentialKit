@@ -5,10 +5,10 @@ from pyhocon import HOCONConverter, ConfigTree
 from pyhocon.config_parser import STR_SUBSTITUTION, ConfigFactory
 
 
-def get_all_file_paths_in_folder(path: str) -> list[str]:
+def get_all_file_paths_in_directory(path: str) -> list[str]:
     """
     Get a list of all file paths within a specified folder and its subdirectories.
-    :param path: The path to the folder to explore
+    :param path: The path to the directory to explore
     :return: A list of file paths.
     """
     if not os.path.exists(path):

@@ -65,7 +65,7 @@ def create_folder_structure(tmpdir):
 
 def test_receive_a_valid_folder_with_files(create_folder_structure):
     folder_path = create_folder_structure
-    result = file_operations.get_all_file_paths_in_folder(folder_path)
+    result = file_operations.get_all_file_paths_in_directory(folder_path)
     assert_that(result[0]).is_named("folder_file.txt")
     assert_that(result[1]).is_named("sub_folder_file.txt")
     all(assert_that(file_path).is_file() for file_path in result)
@@ -73,15 +73,15 @@ def test_receive_a_valid_folder_with_files(create_folder_structure):
 
 def test_receive_an_empty_folder(tmpdir):
     folder_path = tmpdir.mkdir("empty_folder")
-    assert_that(file_operations.get_all_file_paths_in_folder(folder_path)).is_equal_to([])
+    assert_that(file_operations.get_all_file_paths_in_directory(folder_path)).is_equal_to([])
 
 
 def test_invalid_folder_path():
-    assert_that(file_operations.get_all_file_paths_in_folder).raises(OSError).when_called_with("nonexistent_folder")
+    assert_that(file_operations.get_all_file_paths_in_directory).raises(OSError).when_called_with("nonexistent_folder")
 
 
 def test_file_path(create_valid_txt_file):
-    assert_that(file_operations.get_all_file_paths_in_folder).raises(OSError).when_called_with(create_valid_txt_file)
+    assert_that(file_operations.get_all_file_paths_in_directory).raises(OSError).when_called_with(create_valid_txt_file)
 
 
 def test_read_json_receive_a_valid_json_file(create_valid_json_file):
