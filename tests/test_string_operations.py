@@ -1,5 +1,5 @@
 from assertpy import assert_that
-from essentialkit.string_operations import find_pattern_in_string
+from essentialkit.string_operations import find_pattern_in_string, replace_all
 
 
 def test_find_pattern_once_in_string():
@@ -56,3 +56,28 @@ def test_pattern_is_not_str():
     regex = 123
     msg_error = "Arguments must be str"
     assert_that(find_pattern_in_string).raises(TypeError).when_called_with(string, regex).is_equal_to(msg_error)
+
+
+def test_replace_all_with_multiple_replacements():
+    result = replace_all("foo bar baz", {"foo": "oof", "bar": "rab"})
+    assert_that(result).is_equal_to("oof rab baz")
+
+
+def test_replace_all_without_matches():
+    result = replace_all("unchanged", {"key": "value"})
+    assert_that(result).is_equal_to("unchanged")
+
+
+def test_replace_all_in_an_empty_string():
+    result = replace_all("", {"a": "b"})
+    assert_that(result).is_equal_to("")
+
+
+def test_replace_all_without_replacements():
+    result = replace_all("unchanged", {})
+    assert_that(result).is_equal_to("unchanged")
+
+
+def test_replace_all_case_sensitive():
+    result = replace_all("CaseSensitive", {"case": "CASE", "Sensitive": "Insensitive"})
+    assert_that(result).is_equal_to("CaseInsensitive")

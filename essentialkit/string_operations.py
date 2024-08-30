@@ -19,5 +19,16 @@ def find_pattern_in_string(input_string: str, pattern: str) -> list:
         raise ValueError(f"Invalid regex pattern: {e}")
 
 
-def match_pattern():
-    pass
+def replace_all(input_string: str, replace_values: dict) -> str:
+    """
+    This function iterates over each key-value pair in the `replace_values`
+    dictionary and replaces every occurrence of the key in `input_string`
+    with the corresponding value.
+    :param input_string: The input string in which replacements are to be made.
+    :param replace_values: A dictionary where each key is a substring to be replaced,
+    and each value is the substring to replace the key with
+    :return: A new string with all the replacements made.
+    """
+    for key, value in replace_values.items():
+        input_string = input_string.replace(key, value)
+    return input_string
