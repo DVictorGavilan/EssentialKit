@@ -29,8 +29,13 @@ pip install essentialkit
 
 
 ## Functionalities
+### File Operations Module
 - **get_all_file_paths_in_directory**: Retrieve a list of all file paths within a specified folder and its subdirectories.
 - **read_json**: Read and parse a JSON file into a Python dictionary.
 - **write_json**: Serialize a Python dictionary into JSON format and write it to a file.
 - **read_hocon**: Read and parse a HOCON file into a Python dictionary.
 - **write_hocon**: Serialize a Python dictionary into HOCON format and write it to a file.
+### String Operations Module
+- **find_pattern_in_string**: Find all occurrences of a pattern in a given string using regex.
+- **replace_all**: Replace all occurrences of keys in input dict within input string with their corresponding values.
+ 
