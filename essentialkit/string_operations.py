@@ -5,6 +5,7 @@ from re import error
 def find_pattern_in_string(input_string: str, pattern: str) -> list:
     """
     Find all occurrences of a pattern in a given string using regex.
+
     :param input_string: The string in which to search for the pattern.
     :param pattern: The regex pattern to search for.
     :return: A list of all matches found.
@@ -21,9 +22,9 @@ def find_pattern_in_string(input_string: str, pattern: str) -> list:
 
 def replace_all(input_string: str, replace_values: dict) -> str:
     """
-    This function iterates over each key-value pair in the `replace_values`
-    dictionary and replaces every occurrence of the key in `input_string`
-    with the corresponding value.
+    This function iterates over each key-value pair in the `replace_values` dictionary and replaces
+    every occurrence of the key in `input_string` with the corresponding value.
+
     :param input_string: The input string in which replacements are to be made.
     :param replace_values: A dictionary where each key is a substring to be replaced,
     and each value is the substring to replace the key with
