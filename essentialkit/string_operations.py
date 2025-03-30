@@ -38,7 +38,7 @@ def replace_all(input_string: str, replace_values: dict) -> str:
 
 def get_substring_between(string: str, open_mark: str, close_mark: str) -> list[str]:
     """
-    Extract all substrings between open_mark and close_mark using f-strings
+    Extract all substrings between open_mark and close_mark from input string.
 
     :param string: The input string to search within
     :param open_mark: The opening delimiter marking the start of the substring
