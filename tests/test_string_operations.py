@@ -1,5 +1,7 @@
+from math import expm1
+
 from assertpy import assert_that
-from essentialkit.string_operations import find_pattern_in_string, replace_all
+from essentialkit.string_operations import *
 
 
 def test_find_pattern_once_in_string():
@@ -81,3 +83,35 @@ def test_replace_all_without_replacements():
 def test_replace_all_case_sensitive():
     result = replace_all("CaseSensitive", {"case": "CASE", "Sensitive": "Insensitive"})
     assert_that(result).is_equal_to("CaseInsensitive")
+
+
+def test_get_substring_between_case_one_word():
+    string = "Hello [Python]!"
+    open_mark = "["
+    close_mark = "]"
+    expected = ["Python"]
+    assert_that(get_substring_between(string, open_mark, close_mark)).is_equal_to(expected)
+
+
+def test_get_substring_between_case_multiple_words():
+    string = "Hello [Python] and [Java]!"
+    open_mark = "["
+    close_mark = "]"
+    expected = ["Python", "Java"]
+    assert_that(get_substring_between(string, open_mark, close_mark)).is_equal_to(expected)
+
+
+def test_get_substring_between_case_empty_word():
+    string = "Hello []!"
+    open_mark = "["
+    close_mark = "]"
+    expected = [""]
+    assert_that(get_substring_between(string, open_mark, close_mark)).is_equal_to(expected)
+
+
+def test_get_substring_between_case_no_words():
+    string = "Hello Python!"
+    open_mark = "["
+    close_mark = "]"
+    expected = []
+    assert_that(get_substring_between(string, open_mark, close_mark)).is_equal_to(expected)
