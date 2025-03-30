@@ -58,6 +58,27 @@ def read_hocon(path: str, replace_env_variables_as_str: bool) -> ConfigTree:
     return ConfigFactory.parse_file(path, resolve=False)
 
 
+def iterate_hocon(config: ConfigTree, parent_key: str = ""):
+    """
+    This function traverses the HOCON configuration structure and yields key-value pairs.
+    Nested dictionaries and lists are flattened into dot (`.`) and index (`[i]`) notation.
+
+    :param config: The HOCON configuration object to iterate over
+    :param parent_key: The hierarchical key prefix used for recursion. Defaults to an empty string
+    :return: A tuple containing the full hierarchical key as a string and its corresponding value
+    """
+    if isinstance(config, ConfigTree):
+        for key, value in config.items():
+            full_key = f"{parent_key}.{key}" if parent_key else key
+            yield from iterate_hocon(value, full_key)
+    elif isinstance(config, list):
+        for index, item in enumerate(config):
+            full_key = f"{parent_key}[{index}]"
+            yield from iterate_hocon(item, full_key)
+    else:
+        yield parent_key, config
+
+
 def write_hocon(data: dict, output_path: str, indent: int = 2, compact=True) -> None:
     """
     This function serializes a Python dictionary into HOCON format and writes it to the specified

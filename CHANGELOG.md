@@ -5,6 +5,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.3.0] - 2025-03-30
+  
+New functionalities.
+ 
+### Added
+- String Operations Module including:
+  - **get_substring_between**: Extract all substrings between open_mark and close_mark from input string.
+- File Operations Module including:
+  - **iterate_hocon**: This function traverses the HOCON configuration structure and yields key-value pairs.
+ 
+### Changed
+- Docstring documentation
+ 
+### Fixed
+- Delete unnecessary imports
+
+
 ## [0.2.0] - 2024-08-30
   
 New functionalities.
