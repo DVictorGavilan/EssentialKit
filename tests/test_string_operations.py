@@ -1,5 +1,3 @@
-from math import expm1
-
 from assertpy import assert_that
 from essentialkit.string_operations import *
 
