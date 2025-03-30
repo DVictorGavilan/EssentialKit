@@ -143,6 +143,106 @@ def test_read_hocon_receive_a_txt_file(create_valid_txt_file):
     assert_that(file_operations.read_hocon).raises(ParseSyntaxException).when_called_with(create_valid_txt_file, False)
 
 
+def test_iterate_hocon_case_str_int_bool():
+    hocon_string = """
+        config {
+            database {
+                host = "localhost"
+                port = 5432
+            }
+            debug = true
+        }
+    """
+    config = ConfigFactory.parse_string(hocon_string)
+    result = list(file_operations.iterate_hocon(config))
+    expected = [
+        ("config.database.host", "localhost"),
+        ("config.database.port", 5432),
+        ("config.debug", True)
+    ]
+    assert_that(result).is_equal_to(expected)
+
+
+def test_iterate_hocon_case_list():
+    hocon_string = """
+        users = ["Alice", "Bob", "Charlie"]
+    """
+    config = ConfigFactory.parse_string(hocon_string)
+    result = list(file_operations.iterate_hocon(config))
+    expected = [
+        ("users[0]", "Alice"),
+        ("users[1]", "Bob"),
+        ("users[2]", "Charlie")
+    ]
+    assert_that(result).is_equal_to(expected)
+
+
+def test_iterate_hocon_case_nested_lists_and_objects():
+    hocon_string = """
+        config {
+            list = [
+                { id = 1, name = "Item1" },
+                { id = 2, name = "Item2" }
+            ]
+        }
+    """
+    config = ConfigFactory.parse_string(hocon_string)
+    result = list(file_operations.iterate_hocon(config))
+    expected = [
+        ("config.list[0].id", 1),
+        ("config.list[0].name", "Item1"),
+        ("config.list[1].id", 2),
+        ("config.list[1].name", "Item2")
+    ]
+    assert_that(result).is_equal_to(expected)
+
+
+def test_iterate_hocon_case_empty_object():
+    hocon_string = """
+        empty_config = {}
+    """
+    config = ConfigFactory.parse_string(hocon_string)
+    result = list(file_operations.iterate_hocon(config))
+    expected = []
+    assert_that(result).is_equal_to(expected)
+
+
+def test_iterate_hocon_case_empty_list():
+    hocon_string = """
+        empty_list = []
+    """
+    config = ConfigFactory.parse_string(hocon_string)
+    result = list(file_operations.iterate_hocon(config))
+    expected = []
+    assert_that(result).is_equal_to(expected)
+
+
+def test_iterate_hocon_case_complex_config():
+    hocon_string = """
+        config {
+            nested {
+                key1 = "value1"
+                key2 {
+                    subkey = "value2"
+                }
+            }
+            list = [
+                "A", "B", { nestedKey = "C" }
+            ]
+        }
+    """
+    config = ConfigFactory.parse_string(hocon_string)
+    result = list(file_operations.iterate_hocon(config))
+    expected = [
+        ("config.nested.key1", "value1"),
+        ("config.nested.key2.subkey", "value2"),
+        ("config.list[0]", "A"),
+        ("config.list[1]", "B"),
+        ("config.list[2].nestedKey", "C")
+    ]
+    assert_that(result).is_equal_to(expected)
+
+
 def test_write_hocon_data_successfully(output_path):
     test_data = {"key1": "value1", "key2": 2, "key3": [1, 2, 3]}
     file_operations.write_hocon(test_data, str(output_path))
