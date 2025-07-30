@@ -1,5 +1,7 @@
 import pytest
+import tempfile
 
+from openpyxl import Workbook
 from assertpy import assert_that
 from essentialkit.file_operations import *
 from pyparsing import ParseSyntaxException
@@ -256,3 +258,105 @@ def test_write_hocon_invalid_input(output_path):
 def test_write_hocon_invalid_output_path():
     invalid_path = "/invalid/output.json"
     assert_that(write_hocon).raises(FileNotFoundError).when_called_with({"key": "value"}, invalid_path)
+
+
+@pytest.fixture
+def temp_excel_file():
+    # Create a temp Excel file with one sheet and some dummy data
+    #       A       B
+    # 1    ID    Name
+    # 2     1   Alice
+    # 3     2     Bob
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Sheet1"
+    ws["A1"] = "ID"
+    ws["B1"] = "Name"
+    ws["A2"] = 1
+    ws["B2"] = "Alice"
+    ws["A3"] = 2
+    ws["B3"] = "Bob"
+
+    # Save to a temporary file
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".xlsx")
+    wb.save(temp_file.name)
+    yield Path(temp_file.name)
+
+    # Cleanup
+    temp_file.close()
+    Path(temp_file.name).unlink()
+
+
+def test_update_column_success(temp_excel_file):
+    values = ["Engineer", "Manager"]
+    update_excel_column_from_list(
+        excel_path=temp_excel_file,
+        sheet_name="Sheet1",
+        column_letter="C",
+        start_row=2,
+        values=values
+    )
+
+    wb = load_workbook(temp_excel_file)
+    ws = wb["Sheet1"]
+
+    assert_that(ws["C1"].value).is_none()
+    assert_that(ws["C2"].value).is_equal_to("Engineer")
+    assert_that(ws["C3"].value).is_equal_to("Manager")
+
+
+def test_update_empty_values(temp_excel_file):
+    values = []
+    update_excel_column_from_list(
+        excel_path=temp_excel_file,
+        sheet_name="Sheet1",
+        column_letter="D",
+        start_row=2,
+        values=values
+    )
+
+    wb = load_workbook(temp_excel_file)
+    ws = wb["Sheet1"]
+
+    assert_that(ws["D2"].value).is_none()
+    assert_that(ws["D3"].value).is_none()
+
+
+def test_missing_sheet(temp_excel_file):
+    with pytest.raises(KeyError):
+        update_excel_column_from_list(
+            excel_path=temp_excel_file,
+            sheet_name="WrongSheet",
+            column_letter="B",
+            start_row=2,
+            values=["X", "Y"]
+        )
+
+
+def test_file_not_found():
+    fake_path = Path("/fake/path/nonexistent.xlsx")
+    with pytest.raises(FileNotFoundError):
+        update_excel_column_from_list(
+            excel_path=fake_path,
+            sheet_name="Sheet1",
+            column_letter="A",
+            start_row=1,
+            values=["Test"]
+        )
+
+
+def test_partial_overwrite(temp_excel_file):
+    values = ["Updated"]
+    update_excel_column_from_list(
+        excel_path=temp_excel_file,
+        sheet_name="Sheet1",
+        column_letter="B",
+        start_row=3,
+        values=values
+    )
+
+    wb = load_workbook(temp_excel_file)
+    ws = wb["Sheet1"]
+
+    assert_that(ws["B2"].value).is_equal_to("Alice")
+    assert_that(ws["B3"].value).is_equal_to("Updated")

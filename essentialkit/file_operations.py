@@ -1,6 +1,8 @@
 import os
 import json
 
+from pathlib import Path
+from openpyxl import load_workbook
 from pyhocon import HOCONConverter, ConfigTree
 from pyhocon.config_parser import STR_SUBSTITUTION, ConfigFactory
 
@@ -93,3 +95,30 @@ def write_hocon(data: dict, output_path: str, indent: int = 2, compact=True) -> 
     data_parsed = ConfigFactory.from_dict(data)
     with open(output_path, 'w') as conf_file:
         conf_file.write(HOCONConverter.to_hocon(data_parsed, compact=compact, indent=indent))
+
+
+def update_excel_column_from_list(
+        excel_path: Path,
+        sheet_name: str,
+        column_letter: str,
+        start_row: int,
+        values: list
+) -> None:
+    """
+    Update a specific column in an Excel sheet with values from a list
+    :param excel_path: path to the existing Excel file
+    :param sheet_name: target Excel sheet name
+    :param column_letter: excel column letter to write into (e.g., "B")
+    :param start_row: starting Excel row (default = 2, assuming headers in row 1).
+    :param values: list of values to write into the specified column
+    :return: Excel file updated with the new values in the specified
+    """
+    wb = load_workbook(excel_path)
+    ws = wb[sheet_name]
+
+    for i, val in enumerate(values, start=start_row):
+        cell = f"{column_letter}{i}"
+        ws[cell] = val
+
+    wb.save(excel_path)
+    print(f"✅ Updated Excel file '{excel_path}' with values from in column {column_letter}.")

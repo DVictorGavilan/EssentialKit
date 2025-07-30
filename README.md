@@ -34,7 +34,9 @@ pip install essentialkit
 - **read_json**: Read and parse a JSON file into a Python dictionary.
 - **write_json**: Serialize a Python dictionary into JSON format and write it to a file.
 - **read_hocon**: Read and parse a HOCON file into a Python dictionary.
+- **iterate_hocon**: Read nested dictionaries and lists into dot and index generator
 - **write_hocon**: Serialize a Python dictionary into HOCON format and write it to a file.
+- **update_excel_column_from_list**: Update a specific column in an Excel sheet with values from a list
 ### String Operations Module
 - **find_pattern_in_string**: Find all occurrences of a pattern in a given string using regex.
 - **replace_all**: Replace all occurrences of keys in input dict within input string with their corresponding values.
