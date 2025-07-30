@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.0] - 2025-07-30
+  
+New functionalities.
+ 
+### Added
+- File Operations Module including:
+  - **update_excel_column_from_list**: Update a specific column in an Excel sheet with values from a list.
+ 
+### Changed
+- Docstring documentation
+- Update requirements.txt
+ 
+### Fixed
+
+
 
 ## [0.3.0] - 2025-03-30
   
