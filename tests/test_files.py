@@ -69,7 +69,7 @@ def create_tmp_directory(tmp_path: Path) -> Path:
 
 def test_receive_a_valid_directory_with_files(create_tmp_directory: Path):
     directory_path = create_tmp_directory
-    result = get_all_file_paths_in_directory(directory_path)
+    result = list_files(directory_path)
     assert_that(result[0].name).is_equal_to("directory_file.txt")
     assert_that(result[1].name).is_equal_to("sub_directory_file.txt")
     for file_path in result:
@@ -79,16 +79,16 @@ def test_receive_a_valid_directory_with_files(create_tmp_directory: Path):
 def test_receive_an_empty_directory(tmp_path: Path):
     empty_directory = tmp_path / "empty_folder"
     empty_directory.mkdir()
-    assert_that(get_all_file_paths_in_directory(empty_directory)).is_equal_to([])
+    assert_that(list_files(empty_directory)).is_equal_to([])
 
 
 def test_invalid_directory_path():
     invalid_path = Path("nonexistent_folder")
-    assert_that(get_all_file_paths_in_directory).raises(OSError).when_called_with(invalid_path)
+    assert_that(list_files).raises(OSError).when_called_with(invalid_path)
 
 
 def test_file_path(valid_txt_file: Path):
-    assert_that(get_all_file_paths_in_directory).raises(OSError).when_called_with(valid_txt_file)
+    assert_that(list_files).raises(OSError).when_called_with(valid_txt_file)
 
 
 def test_read_json_receive_a_valid_json_file(valid_json_file):

@@ -6,7 +6,7 @@ from pyhocon import HOCONConverter, ConfigTree
 from pyhocon.config_parser import STR_SUBSTITUTION, ConfigFactory
 
 
-def get_all_file_paths_in_directory(path: Path) -> list[Path]:
+def list_files(path: Path) -> list[Path]:
     """
     Get a list of all file paths within a specified folder and its subdirectories.
 
