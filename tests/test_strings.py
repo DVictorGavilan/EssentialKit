@@ -1,5 +1,5 @@
 from assertpy import assert_that
-from essentialkit.string_operations import *
+from essentialkit.strings import *
 
 
 def test_find_pattern_once_in_string():

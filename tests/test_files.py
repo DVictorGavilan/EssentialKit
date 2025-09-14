@@ -3,7 +3,7 @@ import tempfile
 
 from openpyxl import Workbook
 from assertpy import assert_that
-from essentialkit.file_operations import *
+from essentialkit.files import *
 from pyparsing import ParseSyntaxException
 from pyhocon import HOCONConverter, ConfigFactory
 
