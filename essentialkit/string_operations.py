@@ -3,7 +3,7 @@ import re
 from re import error
 
 
-def find_pattern_in_string(input_string: str, pattern: str) -> list:
+def findall_matches(input_string: str, pattern: str) -> list:
     """
     Find all occurrences of a pattern in a given string using regex.
 
