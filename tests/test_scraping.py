@@ -49,12 +49,8 @@ def test_launch_chrome_creates_download_directory(
 ):
     download_dir = tmp_path / "downloads"
 
-    # Directory should not exist before call
     assert_that(download_dir.exists()).is_false()
-
     launch_chrome(download_dir)
-
-    # Directory should be created
     assert_that(download_dir.exists()).is_true()
 
 

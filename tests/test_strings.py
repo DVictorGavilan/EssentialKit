@@ -41,21 +41,27 @@ def test_invalid_pattern():
     string = 123
     regex = r"(\w+"
     msg_error = "Invalid regex pattern"
-    assert_that(findall_matches).raises(ValueError).when_called_with(string, regex).starts_with(msg_error)
+    assert_that(findall_matches).raises(ValueError).when_called_with(
+        string, regex
+    ).starts_with(msg_error)
 
 
 def test_input_string_not_str():
     string = 123
     regex = "[A-Za-z]{1}[0-9][.][0-9].[0-9]"
     msg_error = "Arguments must be str"
-    assert_that(findall_matches).raises(TypeError).when_called_with(string, regex).is_equal_to(msg_error)
+    assert_that(findall_matches).raises(TypeError).when_called_with(
+        string, regex
+    ).is_equal_to(msg_error)
 
 
 def test_pattern_is_not_str():
     string = "asv.2.00.0asdf.334.23"
     regex = 123
     msg_error = "Arguments must be str"
-    assert_that(findall_matches).raises(TypeError).when_called_with(string, regex).is_equal_to(msg_error)
+    assert_that(findall_matches).raises(TypeError).when_called_with(
+        string, regex
+    ).is_equal_to(msg_error)
 
 
 def test_replace_all_with_multiple_replacements():
