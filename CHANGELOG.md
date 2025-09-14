@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.0] - 2025-09-15
+  
+New functionalities.
+ 
+### Added
+- Scraping Module including:
+  - **launch_chrome**: Launches a Chrome browser instance with custom settings.
+ 
+### Changed
+- Docstring documentation
+- Update requirements.txt
+- Refactored package and function names:
+  - Renamed package string_operations to strings. 
+    - Renamed function get_all_file_paths_in_directory to list_files. 
+    - Renamed function update_excel_column_from_list to update_excel_column. 
+  - Renamed package file_operations to files. 
+    - Renamed function find_pattern_in_string to findall_matches.
+- Changed all input path variables from str type to Path.
+ 
+### Fixed
+
+
+
 ## [0.4.0] - 2025-07-30
   
 New functionalities.
