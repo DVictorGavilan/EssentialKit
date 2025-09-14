@@ -96,7 +96,7 @@ def write_hocon(data: dict, output_path: Path, indent: int = 2, compact=True) ->
         conf_file.write(HOCONConverter.to_hocon(data_parsed, compact=compact, indent=indent))
 
 
-def update_excel_column_from_list(
+def update_excel_column(
         excel_path: Path,
         sheet_name: str,
         column_letter: str,

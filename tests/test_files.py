@@ -305,7 +305,7 @@ def temp_excel_file():
 
 def test_update_column_success(temp_excel_file):
     values = ["Engineer", "Manager"]
-    update_excel_column_from_list(
+    update_excel_column(
         excel_path=temp_excel_file,
         sheet_name="Sheet1",
         column_letter="C",
@@ -323,7 +323,7 @@ def test_update_column_success(temp_excel_file):
 
 def test_update_empty_values(temp_excel_file):
     values = []
-    update_excel_column_from_list(
+    update_excel_column(
         excel_path=temp_excel_file,
         sheet_name="Sheet1",
         column_letter="D",
@@ -340,7 +340,7 @@ def test_update_empty_values(temp_excel_file):
 
 def test_missing_sheet(temp_excel_file):
     with pytest.raises(KeyError):
-        update_excel_column_from_list(
+        update_excel_column(
             excel_path=temp_excel_file,
             sheet_name="WrongSheet",
             column_letter="B",
@@ -352,7 +352,7 @@ def test_missing_sheet(temp_excel_file):
 def test_file_not_found():
     fake_path = Path("/fake/path/nonexistent.xlsx")
     with pytest.raises(FileNotFoundError):
-        update_excel_column_from_list(
+        update_excel_column(
             excel_path=fake_path,
             sheet_name="Sheet1",
             column_letter="A",
@@ -363,7 +363,7 @@ def test_file_not_found():
 
 def test_partial_overwrite(temp_excel_file):
     values = ["Updated"]
-    update_excel_column_from_list(
+    update_excel_column(
         excel_path=temp_excel_file,
         sheet_name="Sheet1",
         column_letter="B",
