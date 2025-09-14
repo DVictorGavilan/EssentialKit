@@ -7,21 +7,21 @@ from pyhocon import HOCONConverter, ConfigTree
 from pyhocon.config_parser import STR_SUBSTITUTION, ConfigFactory
 
 
-def get_all_file_paths_in_directory(path: str) -> list[str]:
+def get_all_file_paths_in_directory(path: Path) -> list[Path]:
     """
     Get a list of all file paths within a specified folder and its subdirectories.
 
     :param path: The path to the directory to explore
     :return: A list of file paths.
     """
-    if not os.path.exists(path):
+    if not path.exists():
         raise OSError(f"The specified path '{path}' does not exist.")
-    if os.path.isfile(path):
-        raise OSError(f"The specified path '{path}' is a file path.")
-    return [os.path.join(root, file) for root, _, files in os.walk(path) for file in files]
+    if not path.is_dir():
+        raise OSError(f"The specified path '{path}' is not a directory.")
+    return [subpath for subpath in path.rglob('*') if subpath.is_file()]
 
 
-def read_json(path: str) -> dict:
+def read_json(path: Path) -> dict:
     """
     Read and parse a JSON file from the given path and return its contents as a Python dictionary.
 
@@ -32,7 +32,7 @@ def read_json(path: str) -> dict:
         return json.load(file)
 
 
-def write_json(data: dict, output_path: str, indent: int = 4, sort_keys=False) -> None:
+def write_json(data: dict, output_path: Path, indent: int = 4, sort_keys=False) -> None:
     """
     This function serializes a Python dictionary into JSON format and writes it to the specified
     file.
@@ -47,7 +47,7 @@ def write_json(data: dict, output_path: str, indent: int = 4, sort_keys=False) -
         json.dump(data, file, indent=indent, sort_keys=sort_keys)
 
 
-def read_hocon(path: str, replace_env_variables_as_str: bool) -> ConfigTree:
+def read_hocon(path: Path, replace_env_variables_as_str: bool) -> ConfigTree:
     """
     Read and parse a HOCON file from the given path and return its contents as a Python dictionary.
 
@@ -81,7 +81,7 @@ def iterate_hocon(config: ConfigTree, parent_key: str = ""):
         yield parent_key, config
 
 
-def write_hocon(data: dict, output_path: str, indent: int = 2, compact=True) -> None:
+def write_hocon(data: dict, output_path: Path, indent: int = 2, compact=True) -> None:
     """
     This function serializes a Python dictionary into HOCON format and writes it to the specified
     file.
