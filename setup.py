@@ -6,7 +6,7 @@ with open("README.md", "r") as file:
 
 setup(
     name="essentialkit",
-    version="0.4.0",
+    version="0.5.0",
     description="A comprehensive utility package to simplify common tasks in Python programming",
     packages=find_packages(),
     long_description=long_description,
@@ -20,7 +20,9 @@ setup(
         "pyhocon >= 0.3.60",
         "assertpy >= 1.1.0 ",
         "pytest >= 8.2.2",
-        "openpyxl >= 3.1.5"
+        "openpyxl >= 3.1.5",
+        "selenium >= 4.35.0",
+        "webdriver-manager >= 4.0.2"
     ],
     test_suite='tests',
     tests_require=['pytest'],
