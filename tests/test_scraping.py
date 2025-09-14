@@ -1,6 +1,6 @@
-import tempfile
-from pathlib import Path
 import pytest
+
+from pathlib import Path
 from assertpy import assert_that
 from unittest.mock import patch, MagicMock
 from selenium.webdriver.chrome.webdriver import WebDriver
