@@ -6,7 +6,7 @@ with open("README.md", "r") as file:
 
 setup(
     name="essentialkit",
-    version="0.5.0",
+    version="0.5.1",
     description="A comprehensive utility package to simplify common tasks in Python programming",
     packages=find_packages(),
     long_description=long_description,
