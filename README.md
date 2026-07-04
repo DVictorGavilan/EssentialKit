@@ -1,7 +1,9 @@
 # EssentialKit
 
 ## Functional Description
-A  comprehensive utility package to simplify common tasks in Python programming
+EssentialKit is a lightweight Python utility package designed to simplify common development tasks such as file handling, string manipulation, browser automation, and logging configuration.
+
+The goal of this package is to provide reusable helper functions that speed up the development of Python projects while keeping the codebase clean, simple, and easy to maintain.
 
 ## Owner
 For any bugs or questions, please reach out to [Dani Gavilán](mailto:danigavipedro96@gmail.com)
@@ -12,15 +14,6 @@ This project follows a Git Flow simplified branching methodology
 - **Develop Branch**: main integration branch for ongoing development. Features and fixes are merged into this branch before reaching master
 - **Feature Branch**: created from develop branch to work on new features
 
-## Prerequisites
-This project uses:
-- Language: Python 3.10
-- Libraries: 
-  - pyhocon
-  - pytest
-  - assertpy
-  - selenium
-
 ## How to use it
 Install the library
 
@@ -28,10 +21,23 @@ Install the library
 pip install essentialkit
 ```
 
-```bash
-directory: Path = "/home/user/Documents/test/"
+```python
+import essentialkit
 
+from pathlib import Path
+
+
+directory: Path = Path("/home/user/Documents/test")
 files: list[Path] = essentialkit.files.list_files(path=directory)
+
+text: str = "Hello, name. Welcome to project."
+result: str = essentialkit.strings.replace_all(
+  input_string=text,
+  replace_values={
+    "name": "Dani",
+    "project": "EssentialKit"
+  }
+)
 
 ```
 
@@ -46,8 +52,10 @@ files: list[Path] = essentialkit.files.list_files(path=directory)
 - **write_hocon**: Serialize a Python dictionary into HOCON format and write it to a file.
 - **update_excel_column**: Update a specific column in an Excel sheet with values from a list.
 ### String Module
-- **find_pattern_in_string**: Find all occurrences of a pattern in a given string using regex.
+- **findall_matches**: Find all occurrences of a pattern in a given string using regex.
 - **replace_all**: Replace all occurrences of keys in input dict within input string with their corresponding values.
- ### Scraping Module
+- **get_substring_between**: Extract all substrings between open_mark and close_mark from input string.
+### Scraping Module
 - **launch_chrome**: Launches a Chrome browser instance with custom settings.
- 
+### Log Module
+- **configure**: Configure Python logging from a JSON configuration file compatible with logging.config.dictConfig.

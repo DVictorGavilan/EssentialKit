@@ -4,6 +4,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.0] - 2026-07-04
+
+New functionalities.
+
+### Added
+
+* Log Module including:
+  * **configure**: Configure Python logging from a JSON configuration file compatible with `logging.config.dictConfig`.
+
+* GitHub Actions workflow including:
+  * Automated test execution on push and pull request.
+  * Coverage report generation using pytest-cov.
+  * Minimum coverage threshold validation.
+
+### Changed
+
+* Updated README with more examples.
+
+### Fixed
+
+## [0.5.1] - 2025-09-17
+ 
+### Added
+ 
+### Changed
+ 
+### Fixed
+- Import paths
+
 ## [0.5.0] - 2025-09-15
   
 New functionalities.
@@ -26,7 +55,6 @@ New functionalities.
 ### Fixed
 
 
-
 ## [0.4.0] - 2025-07-30
   
 New functionalities.
@@ -40,7 +68,6 @@ New functionalities.
 - Update requirements.txt
  
 ### Fixed
-
 
 
 ## [0.3.0] - 2025-03-30
@@ -73,7 +100,7 @@ New functionalities.
  
 ### Fixed
 
- 
+
 ## [0.1.0] - 2024-07-13
 Base Project Structure.
  
