@@ -1,7 +1,9 @@
 # EssentialKit
 
 ## Functional Description
-A  comprehensive utility package to simplify common tasks in Python programming
+EssentialKit is a lightweight Python utility package designed to simplify common development tasks such as file handling, string manipulation, browser automation, and logging configuration.
+
+The goal of this package is to provide reusable helper functions that speed up the development of Python projects while keeping the codebase clean, simple, and easy to maintain.
 
 ## Owner
 For any bugs or questions, please reach out to [Dani Gavilán](mailto:danigavipedro96@gmail.com)
@@ -29,9 +31,20 @@ pip install essentialkit
 ```
 
 ```bash
-directory: Path = "/home/user/Documents/test/"
+import essentialkit
 
+
+directory = Path("/home/user/Documents/test")
 files: list[Path] = essentialkit.files.list_files(path=directory)
+
+text = "Hello, name. Welcome to project."
+result = essentialkit.strings.replace_all(
+  input_string=text,
+  replace_values={
+    "name": "Dani",
+    "project": "EssentialKit"
+  }
+)
 
 ```
 
@@ -48,6 +61,7 @@ files: list[Path] = essentialkit.files.list_files(path=directory)
 ### String Module
 - **find_pattern_in_string**: Find all occurrences of a pattern in a given string using regex.
 - **replace_all**: Replace all occurrences of keys in input dict within input string with their corresponding values.
- ### Scraping Module
+### Scraping Module
 - **launch_chrome**: Launches a Chrome browser instance with custom settings.
- 
+### Log Module
+- **configure**: Configure Python logging from a JSON configuration file compatible with logging.config.dictConfig.
