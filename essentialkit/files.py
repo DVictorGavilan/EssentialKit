@@ -120,4 +120,3 @@ def update_excel_column(
         ws[cell] = val
 
     wb.save(excel_path)
-    print(f"✅ Updated Excel file '{excel_path}' with values from in column {column_letter}.")
