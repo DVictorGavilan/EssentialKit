@@ -30,15 +30,17 @@ Install the library
 pip install essentialkit
 ```
 
-```bash
+```python
 import essentialkit
 
+from pathlib import Path
 
-directory = Path("/home/user/Documents/test")
+
+directory: Path = Path("/home/user/Documents/test")
 files: list[Path] = essentialkit.files.list_files(path=directory)
 
-text = "Hello, name. Welcome to project."
-result = essentialkit.strings.replace_all(
+text: str = "Hello, name. Welcome to project."
+result: str = essentialkit.strings.replace_all(
   input_string=text,
   replace_values={
     "name": "Dani",
@@ -59,8 +61,9 @@ result = essentialkit.strings.replace_all(
 - **write_hocon**: Serialize a Python dictionary into HOCON format and write it to a file.
 - **update_excel_column**: Update a specific column in an Excel sheet with values from a list.
 ### String Module
-- **find_pattern_in_string**: Find all occurrences of a pattern in a given string using regex.
+- **findall_matches**: Find all occurrences of a pattern in a given string using regex.
 - **replace_all**: Replace all occurrences of keys in input dict within input string with their corresponding values.
+- **get_substring_between**: Extract all substrings between open_mark and close_mark from input string.
 ### Scraping Module
 - **launch_chrome**: Launches a Chrome browser instance with custom settings.
 ### Log Module
