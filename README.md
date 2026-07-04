@@ -14,15 +14,6 @@ This project follows a Git Flow simplified branching methodology
 - **Develop Branch**: main integration branch for ongoing development. Features and fixes are merged into this branch before reaching master
 - **Feature Branch**: created from develop branch to work on new features
 
-## Prerequisites
-This project uses:
-- Language: Python 3.10
-- Libraries: 
-  - pyhocon
-  - pytest
-  - assertpy
-  - selenium
-
 ## How to use it
 Install the library
 
